@@ -1,0 +1,26 @@
+{
+    "name": "nodecg-discord-utils",
+    "version": "1.0.0",
+    "author": "alphaRomeo323",
+    "license": "MIT",
+    "nodecg": {
+        "compatibleRange": "^1.0.0",
+        "graphics": [
+            {
+                "file": "example.html",
+                "width": 1600,
+                "height": 900
+            }
+        ]
+    },
+    "dependencies": {
+        "discord.js": "^14.7.1",
+        "@discordjs/voice": "^0.14.0",
+        "sodium": "^3.0.2"
+    },
+    "devDependencies": {
+        "eslint":"^8.31.0"
+    }
+}
+    
+    
