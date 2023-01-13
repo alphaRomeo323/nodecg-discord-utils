@@ -55,9 +55,9 @@ In case of included discord.js bot, open nodecg-discord-overlay.json, you'll see
     }
   ]
 
-- `id`: Put your server ID here. it is the first snowflake in the copied message URL.
+- `id`: Put your server ID here. it is the first snowflake in the copied message URL.  
   ![server_id](https://cdn.discordapp.com/attachments/636576061932699650/1063438885742444644/image.png)
-- `roles`: Put role ID that allows control the bot here. if you want to know role IDs check the Develovper mode and right click on role icon.
+- `roles`: Put role ID that allows control the bot here. if you want to know role IDs check the Develovper mode and right click on role icon.  
   ![copy_role_id](https://cdn.discordapp.com/attachments/636576061932699650/1063439477441298483/image.png)
 - `logbot`: If you want to stream other bot's message, please rewrite to `true`.
 

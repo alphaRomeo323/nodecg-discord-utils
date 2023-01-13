@@ -21,9 +21,9 @@ nodecg-discord-utils bundleのAPIルーターです
     "content": "string"
 }
 ```
-`name`: DisplayName of message auther
-`avater`: URL of message auther's avatar
-`content`: body of message
+- `name`: DisplayName of message auther
+- `avater`: URL of message auther's avatar
+- `content`: body of message
 
 ### /discordutils_api/vc
 
@@ -40,8 +40,8 @@ nodecg-discord-utils bundleのAPIルーターです
     ]
 }
 ```
-`members`: Array of members in voice channel
-`name`: DisplayName of member
-`avater`: URL of member's avatar
-`speaking`: Whether or not they are speaking (optional)
+- `members`: Array of members in voice channel
+- `name`: DisplayName of member
+- `avater`: URL of member's avatar
+- `speaking`: Whether or not they are speaking (optional)
 
