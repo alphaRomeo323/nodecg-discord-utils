@@ -1,13 +1,15 @@
 {
     "name": "nodecg-discord-utils",
     "version": "1.0.0",
+    "description": "Discord voice/text overlay, replicants, bot and API",
     "author": "alphaRomeo323",
+    "homepage": "https://github.com/alphaRomeo323/nodecg-discord-utils",
     "license": "MIT",
     "nodecg": {
         "compatibleRange": "^1.0.0",
         "graphics": [
             {
-                "file": "example.html",
+                "file": "overlay.html",
                 "width": 1600,
                 "height": 900
             }

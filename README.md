@@ -68,10 +68,10 @@ Finally type `nodecg start` in your root NodeCG folder to start your bot.
 
 `ping` is the command to check bot operation.
 
-When you start textchat channel stream, send `chatstream enable` command. The bundle start streaming chat log in a channel the command sended. However the message starts with `prefix` (default `^`) isn't be streamed. `chatstream disable` command stops streaming.
+When you start textchat channel stream, send `chatstream start` command. The bundle start streaming chat log in a channel the command sended. However the message starts with `prefix` (default `^`) isn't be streamed. `chatstream stop` command stops streaming.
 
 
-When you start voice channel stream, send `vcstream enable` command. the bot join your VC channel and start overlay. To close the overlay, please send `vcstream disable` command. **Don't move the bot into another voice channel once connected, it might cause the overlay to glitch. Instead, disconnect the bot, move to the new voice channel, then connect the bot again.**
+When you start voice channel stream, send `vcstream start` command. the bot join your VC channel and start overlay. To close the overlay, please send `vcstream stop` command. **Don't move the bot into another voice channel once connected, it might cause the overlay to glitch. Instead, disconnect the bot, move to the new voice channel, then connect the bot again.**
 
 ## API Reference
 

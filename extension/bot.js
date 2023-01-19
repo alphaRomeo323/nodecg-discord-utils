@@ -42,7 +42,7 @@ module.exports = (client, config, nodecg) => {
             }
             if(message.content.startsWith(prefix + 'vcstream')){
                 // prefix + 'vcstream enable' : start observating voice channel
-                if (message.content.split(" ")[1] == 'enable'){
+                if (message.content.split(" ")[1] == 'start'){
                     if (connectionChannel === undefined && message.member.voice.channel !== undefined && message.member.voice.channel !== null){
                         connectionChannel = message.member.voice.channel;
                         connection = joinVoiceChannel({
@@ -57,7 +57,7 @@ module.exports = (client, config, nodecg) => {
 				        message.reply(`you're not in a voice channel!`);
                 }
                 // prefix + 'vcstream disable' : stop observating voice channel
-                else if (message.content.split(" ")[1] == 'disable'){
+                else if (message.content.split(" ")[1] == 'stop'){
                     if (connectionChannel !== undefined){
 				        connection.destroy();
                         connectionChannel = undefined;
@@ -73,7 +73,7 @@ module.exports = (client, config, nodecg) => {
             }
             if(message.content.startsWith(prefix + 'chatstream')){
                 // prefix + 'chatstream enable' : start observating text channel
-                if (message.content.split(" ")[1] == 'enable'){
+                if (message.content.split(" ")[1] == 'start'){
                     if ( message.channel != observatingChannel){
                         observatingChannel = message.channel;
                         message.reply("started observation and streaming text channel in #" + message.channel.name);
@@ -83,7 +83,7 @@ module.exports = (client, config, nodecg) => {
                     }
                 }
                 // prefix + 'chatstream disable' : stop observating text channel
-                else if (message.content.split(" ")[1] == 'disable'){
+                else if (message.content.split(" ")[1] == 'stop'){
                     if ( observatingChannel != undefined ){
                         observatingChannel = undefined;
                         message.reply("text channel observation is stopped");
