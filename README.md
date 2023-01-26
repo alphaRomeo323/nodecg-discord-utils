@@ -1,5 +1,8 @@
 # Nodecg-Discord-Utils
 
+[![Release](https://img.shields.io/github/v/release/alphaRomeo323/nodecg-discord-utils?label=Release)](https://github.com/alphaRomeo323/nodecg-discord-utils/releases)
+![License](https://img.shields.io/github/license/alphaRomeo323/nodecg-discord-utils?label=License)
+
 ## TL:DR
 
 This NodeCG-bundle allows you to stream your voice channel and text channel in real time! You can stream to use included discord.js bot and also from an external bot (written with python, go, etc) via API.
