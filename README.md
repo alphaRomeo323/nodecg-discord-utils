@@ -10,7 +10,7 @@ This NodeCG-bundle allows you to stream your voice channel and text channel in r
 
 ## Installation
 
-Execute `git clone https://github.com/alphaRomeo323/nodecg-discord-utils.git` in `bundles` in your NodeCG installation.
+In your terminal, please navigate to your root NodeCG folder. Then execute the command `nodecg install alphaRomeo323/nodecg-discord-utils`.
 
 Once completed, execute `nodecg defaultconfig nodecg-discord-utils` to generate the config file. Your config file is located in the `cfg` folder in your NodeCG installation.
 
