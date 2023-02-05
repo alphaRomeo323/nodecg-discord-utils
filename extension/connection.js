@@ -1,17 +1,27 @@
-const { Events,GuildMember } = require("discord.js");
-
+const { VoiceConnection } = require("@discordjs/voice");
+const { Events, GuildMember, Client, VoiceChannel } = require("discord.js");
+/**
+ * 
+ * @param {Client} client 
+ * @param {VoiceConnection} connection 
+ * @param {NodeCG} nodecg 
+ * @param {VoiceChannel} channel 
+ * @param {boolean} streamBots 
+ */
 module.exports = (client, connection, nodecg, channel, streamBots) => {
     const vcRep = nodecg.Replicant("vc")
     connection.receiver.speaking.on("start",(userID) =>{
-        updateSpeakingState(String(userID), true);
+        updateSpeakingState(userID, true);
     });
     connection.receiver.speaking.on("end",(userID) =>{
-        updateSpeakingState(String(userID), false);
+        updateSpeakingState(userID, false);
     });
     client.on(Events.VoiceStateUpdate, () => {
         updateVoiceState()
     });
-
+    /**
+     * Update Replicant('vc')
+     */
     const updateVoiceState = () => {
         const members = channel.members
         let temp = [];
@@ -33,6 +43,11 @@ module.exports = (client, connection, nodecg, channel, streamBots) => {
         }
         vcRep.value = temp;
     };
+    /**
+     * Update speaking status when user is included by Replicant('vc')
+     * @param {string} userID 
+     * @param {boolean} speaking 
+     */
     const updateSpeakingState = (userID, speaking) => {
         for(let i=0;i<vcRep.value.length;i++){
             if(vcRep.value[i].id === userID){

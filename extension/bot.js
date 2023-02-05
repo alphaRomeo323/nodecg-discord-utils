@@ -1,12 +1,19 @@
-const { inlineCode, channelMention, Events,Client } = require("discord.js");
+const { inlineCode, channelMention, Events, Client } = require("discord.js");
 const { joinVoiceChannel } = require("@discordjs/voice");
-const Commands = [ 'help','ping','chatstream', 'voicestream' ];
-const connectionStatus  = require("./connection")
+const connectionStatus  = require("./connection");
+const Commands = [ 'help', 'ping', 'chatstream', 'voicestream' ];
+const Help = {
+    'help': 'This Command.',
+    'ping': 'Check the ping.',
+    'chatstream': `${inlineCode('start')}/${inlineCode('stop')} streaming text chat`,
+    'voicestream': `${inlineCode('start')}/${inlineCode('stop')} streaming voice channel`,
+}
+
 
 /**
- * 
+ * Bot commands and actions
  * @param {Client} client 
- * @param {*} nodecg 
+ * @param {NodeCG} nodecg 
  */
 module.exports = (client, nodecg) => {
     const prefix = nodecg.bundleConfig.prefix;
@@ -45,6 +52,14 @@ module.exports = (client, nodecg) => {
         //Commands without special roles
         if (command.startsWith("ping")){
             message.reply("Pong!");
+            return;
+        }
+        if (command.startsWith("help")){
+            let temp = ""
+            for(let i=0;i<Commands.length;i++){
+                temp += `${Commands[i]}: ${Help[Commands[i]]}\n`;
+            }
+            message.reply(temp);
             return;
         }
 

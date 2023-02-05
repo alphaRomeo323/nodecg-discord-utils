@@ -2,6 +2,10 @@ const { Client, GatewayIntentBits, Events } = require('discord.js');
 const bot = require('./bot');
 const api = require('./api');
 
+/**
+ * 
+ * @param { NodeCG } nodecg 
+ */
 module.exports = function (nodecg) {
 
     const router = nodecg.Router();
@@ -17,16 +21,13 @@ module.exports = function (nodecg) {
         bot(c, nodecg);
     });
 
-    nodecg.Replicant("mode").once("change",(newValue) => {
-        nodecg.Replicant("vc").value = [];
-        if( nodecg.bundleConfig.botToken == "" ){
-            nodecg.mount("/discordutils_api", router);
-            nodecg.log.info(`Discord Utilities is runnning in API mode.`);
-            status.value = "api"
-        }
-        else{
-            client.login(nodecg.bundleConfig.botToken);
-        }
-        
-    })
+    nodecg.Replicant("vc").value = [];
+    if( nodecg.bundleConfig.botToken == "" ){
+        nodecg.mount("/discordutils_api", router);
+        nodecg.log.info(`Discord Utilities is runnning in API mode.`);
+        status.value = "api"
+    }
+    else{
+        client.login(nodecg.bundleConfig.botToken);
+    }
 }
