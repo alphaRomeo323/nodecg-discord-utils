@@ -1,19 +1,17 @@
 # NodeCG-Discord-Utils API
 
-todo: translate to English
+This is API of nodecg-discord-utils. You can POST chat/voice data from external bot.
 
 ## /discordutils_api
 
-nodecg-discord-utils bundleのAPIルーターです
+When the bot included by the bundle is disabled (ex. token not found), the bundle enable the router.
 
-このルーターは付属のdiscord.js botが起動していない際に有効になります。
-
-複数のbotからAPIルーターにアクセスすることはおやめください。不具合の原因となります。
+Please don't POST datas from several bots.
 
 ### /discordutils_api/chat
 
-テキストチャットに関するデータを受け取ります。
-データ形式はJSONです。
+You can POST here data about text chat.  
+data type must be JSON.
 ```json
 {
     "name": "string",
@@ -27,8 +25,8 @@ nodecg-discord-utils bundleのAPIルーターです
 
 ### /discordutils_api/vc
 
-ボイスチャットに関するデータを受け取ります。
-データ形式はJSONです。
+You can POST here data about users joining voice channel.  
+data type must be JSON.
 ```json
 {
     "members":[

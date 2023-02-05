@@ -8,7 +8,7 @@
           {
             "id":"",
             "roles":[""],
-            "logbot":false
+            "streamBots":false
           }
         ]
       },
@@ -21,7 +21,7 @@
               {
                 "id":"<guild_id>",
                 "roles":["<role_id>"],
-                "logbot":false
+                "streamBots":false
               }
             ]
         },
@@ -32,12 +32,12 @@
                 {
                     "id":"<guild_id>",
                     "roles":["<role_id>"],
-                    "logbot":false
+                    "streamBots":false
                 },
                 {
                     "id":"<guild_id2>",
                     "roles":["<role_id2>, <role_id3>"],
-                    "logbot":true
+                    "streamBots":true
                 }
             ]
         }
