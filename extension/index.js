@@ -1,15 +1,15 @@
 const { Client, GatewayIntentBits, Events } = require('discord.js');
-const Discord = require('discord.js');
-const commands = ["ping","help","enable","stop"]
 const bot = require('./bot');
 const api = require('./api');
-let temp ;
 
+/**
+ * 
+ * @param { NodeCG } nodecg 
+ */
 module.exports = function (nodecg) {
 
-    connection = undefined;
-
     const router = nodecg.Router();
+    const status = nodecg.Replicant("status")
 
     api(router, nodecg);
 
@@ -17,17 +17,17 @@ module.exports = function (nodecg) {
 
     client.once(Events.ClientReady, c => {
         nodecg.log.info(`Ready! Logged in as ${c.user.tag}`);
-        bot(client, nodecg.bundleConfig, nodecg);
+        status.value = "bot"
+        bot(c, nodecg);
     });
 
-    nodecg.Replicant("mode").once("change",(newValue) => {
-        nodecg.Replicant("vc").value = [];
-        if(newValue=="api" || nodecg.bundleConfig.botToken == ""){
-            nodecg.mount("/discordutils_api", router);
-            nodecg.log.info(`Discord Utilities is runnning in API mode.`);
-        }
-        else{
-            client.login(nodecg.bundleConfig.botToken);
-        }
-    })
+    nodecg.Replicant("vc").value = [];
+    if( nodecg.bundleConfig.botToken == "" ){
+        nodecg.mount("/discordutils_api", router);
+        nodecg.log.info(`Discord Utilities is runnning in API mode.`);
+        status.value = "api"
+    }
+    else{
+        client.login(nodecg.bundleConfig.botToken);
+    }
 }

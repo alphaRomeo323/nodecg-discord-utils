@@ -1,3 +1,8 @@
+/**
+ * Setup Router
+ * @param {Router} router 
+ * @param {NodeCG} nodecg 
+ */
 module.exports = (router, nodecg) => {
     router.post("/chat", (req, res) => {
         const { name } = req.body;

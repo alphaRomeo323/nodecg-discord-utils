@@ -30,7 +30,7 @@ In case of included discord.js bot, open nodecg-discord-overlay.json, you'll see
       "roles": [
         "<role_id>",
       ],
-      "logbot": false
+      "streamBots": false
     }
   ]
 }
@@ -60,21 +60,25 @@ In case of included discord.js bot, open nodecg-discord-overlay.json, you'll see
 
 - `id`: Put your server ID here. it is the first snowflake in the copied message URL.  
   ![server_id](https://cdn.discordapp.com/attachments/636576061932699650/1063438885742444644/image.png)
-- `roles`: Put role ID that allows control the bot here. if you want to know role IDs check the Develovper mode and right click on role icon.  
+- `roles`: When members who isn't bot owner use it, put role ID that allows control the bot here. if you want to know role IDs, check the Develovper mode and right click on role icon.  
   ![copy_role_id](https://cdn.discordapp.com/attachments/636576061932699650/1063439477441298483/image.png)
-- `logbot`: If you want to stream other bot's message, please rewrite to `true`.
+- `streamBots`: If you want to stream other bot's message, please rewrite to `true`.
 
 Finally type `nodecg start` in your root NodeCG folder to start your bot.
 
 
 ## Bot Usage
 
+You can see bot commands with `help`.
+
 `ping` is the command to check bot operation.
 
-When you start textchat channel stream, send `chatstream start` command. The bundle start streaming chat log in a channel the command sended. However the message starts with `prefix` (default `^`) isn't be streamed. `chatstream stop` command stops streaming.
+When you send `chatstream start` command, the bundle start streaming chat log in a channel the command sended. However the message starts with `prefix` (default `^`) isn't be streamed. `chatstream stop` command stops overlay.
 
 
-When you start voice channel stream, send `vcstream start` command. the bot join your VC channel and start overlay. To close the overlay, please send `vcstream stop` command. **Don't move the bot into another voice channel once connected, it might cause the overlay to glitch. Instead, disconnect the bot, move to the new voice channel, then connect the bot again.**
+When you start voice channel stream, send `voicestream start` command. the bot join your VC channel and start overlay. To close the overlay, please send `voicestream stop` command. If there is no member in the voice channel, overlay automatically stops. **Don't move the bot into another voice channel once connected, it might cause the overlay to glitch. Instead, disconnect the bot, move to the new voice channel, then connect the bot again.**
+
+Currently, it can't stream sounds of voice channel. If you need the function, please use other way.
 
 ## API Reference
 
@@ -88,7 +92,6 @@ As for the API, I referred to [tpc3/nodecg-PCCCommunity](https://github.com/tpc3
 
 ## Todo
 
-- current version, the bot can't get speaking status of VC members. (API is already supported.)
 - I want to send message from dashboard to the channel streaming via the bot :)
 
 
