@@ -1,16 +1,12 @@
 const { VoiceConnection } = require("@discordjs/voice");
 const { Events, GuildMember, Client, VoiceChannel } = require("discord.js");
 /**
- * 
- * @param {Client} client 
+ * Speaking observation
  * @param {VoiceConnection} connection 
  * @param {NodeCG} nodecg 
- * @param {VoiceChannel} channel 
- * @param {boolean} streamBots 
  */
 module.exports = (connection, nodecg) => {
     const vcRep = nodecg.Replicant("vc")
-    //speaking observation
     connection.receiver.speaking.on("start",(userID) =>{
         updateSpeakingState(userID, true);
     });
