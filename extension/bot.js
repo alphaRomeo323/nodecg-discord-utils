@@ -1,12 +1,12 @@
-const { inlineCode, channelMention, Events, Client } = require("discord.js");
+const { inlineCode, channelMention, Events, Client, GuildMember } = require("discord.js");
 const { joinVoiceChannel } = require("@discordjs/voice");
 const connectionStatus  = require("./connection");
 const Commands = [ 'help', 'ping', 'chatstream', 'voicestream' ];
 const Help = {
     'help': 'This Command.',
     'ping': 'Check the ping.',
-    'chatstream': `${inlineCode('start')}/${inlineCode('stop')} streaming text chat`,
-    'voicestream': `${inlineCode('start')}/${inlineCode('stop')} streaming voice channel`,
+    'chatstream': `${inlineCode('start')}/${inlineCode('stop')} streaming text chat.`,
+    'voicestream': `${inlineCode('start')}/${inlineCode('stop')} streaming voice channel.`,
 }
 
 
@@ -43,6 +43,7 @@ module.exports = (client, nodecg) => {
         }
     });
 
+    //commands
     client.on(Events.MessageCreate, message =>{
         if (message.author.bot) return;
         if (! message.guild) return;
@@ -50,10 +51,12 @@ module.exports = (client, nodecg) => {
         const command = message.content.replace(prefix, '');
         if (! Commands.includes(command.split(' ')[0])) return;
         //Commands without special roles
+        ////ping: Check the ping.
         if (command.startsWith("ping")){
             message.reply("Pong!");
             return;
         }
+        ////help: Show the help
         if (command.startsWith("help")){
             let temp = ""
             for(let i=0;i<Commands.length;i++){
@@ -65,8 +68,8 @@ module.exports = (client, nodecg) => {
 
         if (
             !message.member.roles.cache.hasAny(...GetRoles(message.guild.id))
-            && 
-            message.author !== client.application.owner
+            &&
+            message.author.id !== client.application.owner?.id
         ) {
             message.reply(
                 "You don't have any role to execute the command:" + inlineCode(command.split(' ')[0])
@@ -84,8 +87,9 @@ module.exports = (client, nodecg) => {
             }
             return;
         }
+        ////chatstream: Start/stop streaming text chat.
         if (command.startsWith("chatstream stop")){
-            if(chatOverlayId === "" || chatOverlayId === undefined){
+            if(chatOverlayId === "" || typeof chatOverlayId !== "string"){
                 message.reply("Already stopped!")
             }
             else{
@@ -94,6 +98,7 @@ module.exports = (client, nodecg) => {
             }
             return;
         }
+        ////voicestream: Start/stop streaming voice channel.
         if (command.startsWith("voicestream start")){
             if(!message.member.voice.channel){
                 message.reply("You're not in a voice channel!");
@@ -111,7 +116,7 @@ module.exports = (client, nodecg) => {
                     adapterCreator: voiceOverlay.guild.voiceAdapterCreator,
             });
             message.reply("Started streaming voice channel in " + channelMention(voiceOverlay.id));
-            connectionStatus(client, connection, nodecg, voiceOverlay, GetStreamBots(message.guild.id));
+            connectionStatus(connection, nodecg)
             return;
         }
         if (command.startsWith("voicestream stop")){
@@ -127,16 +132,18 @@ module.exports = (client, nodecg) => {
         message.reply("Command is wrong or undefined");
     })
 
+    //voicechat observation
+    client.on(Events.VoiceStateUpdate, () => {
+        if(typeof voiceOverlay !== "undefined") {
+            updateVoiceState()
+            if(voiceOverlay?.members.size <= 1) stopVoiceStream();
+        }
+    });
 
+    //initialization when nodecg is exit
     process.on("exit", () =>{
         if(typeof voiceOverlay !== "undefined") stopVoiceStream();
     })
-
-    client.on(Events.VoiceStateUpdate, () => {
-        if(voiceOverlay?.members.size <= 1) stopVoiceStream();
-    });
-
-    
 
     /**
      * check whether it will stream messages/voice from bots.
@@ -165,6 +172,31 @@ module.exports = (client, nodecg) => {
             }
         }
         return [];
+    }
+
+    /**
+     * Update Replicant('vc')
+     */
+    const updateVoiceState = () => {
+        const members = voiceOverlay.members
+        let temp = [];
+        let member = new GuildMember()
+        for(let i=0;i<members.size;i++){
+            member = members.at(i)
+            if( member.user.username == client.user.username ){
+                continue;
+            }
+            if(member.user.bot && streamBots){
+                continue;
+            }
+            temp.push({
+                'name': member.displayName,
+                'avatar': member.user.avatarURL(),
+                'id':  member.id,
+                'speaking': false
+            })
+        }
+        vcRep.value = temp;
     }
 
     /**

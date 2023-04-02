@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Events } = require('discord.js');
+const { Client, GatewayIntentBits, Events, interaction } = require('discord.js');
 const bot = require('./bot');
 const api = require('./api');
 
@@ -18,7 +18,9 @@ module.exports = function (nodecg) {
     client.once(Events.ClientReady, c => {
         nodecg.log.info(`Ready! Logged in as ${c.user.tag}`);
         status.value = "bot"
-        bot(c, nodecg);
+        c.application.fetch().then(() => {
+            bot(c, nodecg)
+        });
     });
 
     nodecg.Replicant("vc").value = [];
