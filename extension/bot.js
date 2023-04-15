@@ -186,7 +186,7 @@ module.exports = (client, nodecg) => {
             if( member.user.username == client.user.username ){
                 continue;
             }
-            if(member.user.bot && streamBots){
+            if(member.user.bot && GetStreamBots(voiceOverlay.guild.id)){
                 continue;
             }
             temp.push({
